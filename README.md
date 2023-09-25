@@ -23,14 +23,14 @@ Dieses Projekt dient zur einfachen Erkennung von Menschen auf einem Bild.
 
     * **Aktiviere die virtuelle Umgebung:**
         * **Windows:** 
-         ```shell 
-         AI\Scripts\activate
-         ```
+            ```shell 
+            AI\Scripts\activate
+            ```
 
         * **MacOS / Linux:** 
-         ```shell
-         source AI/bin/activate
-         ```
+            ```shell
+            source AI/bin/activate
+            ```
 
 
     * **Bibliotheken installieren:**
