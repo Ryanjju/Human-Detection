@@ -1,53 +1,87 @@
-README.MD
+# Readme
 
-Readme
-======
+## Projektbeschreibung
 
-Projektbeschreibung
--------------------
+Dieses Projekt dient zur einfachen Erkennung von Menschen auf einem Bild.
 
-Dieses Projekt ist zur einfachen erkenung von Menschen auf einem Bild.
+## Installation
 
-Installation
-------------
+* **Downloads:**
+    * Python 3.11: [Python 3.11 Download](https://www.python.org/downloads/)
+    * Visual Studio Code: [Visual Studio Code Download](https://code.visualstudio.com/)
 
-*   Downloads
-    *   Python 3.11: https://www.python.org/downloads/
-    *   Visual Studio Code: https://code.visualstudio.com/
-*   Installation
-    *   Folgen sie den Anweisungen des Python installers
-    *   DownloDEN Sie in VS Code unter _Extentions_ `⇧` + `⌘` + `X` oder `STRG` + `⇧` + `X` die _Python_ Extention von Microsoft
-*   Installation der Python Bibliotheken etc.
-    *   **Instaliere Virtuelle Umgebung** -- `python3 -m venv AI` _AI_ ist der Name der Virtuellen Umgebung Aktivierung
-        *   **Windows**              `AI\Scripts\activate`
-        *   **MacOS / Linux**   `source AI/bin/activate`
-    *   **Installiere Bibliotheken** -- `pip install -r requirements.txt`
-    *   **Virtuelle Umgebung auswählen** -- `Auf [Python versionsbezeichnung (z.B. 3.11.5)] klicken. → Auf [Python [Version (z.B. 3.11.5)] (64-bit) ('AI': venv)] klicken.`
+* **Installation:**
+    * Folgen Sie den Anweisungen des Python Installers.
+    * Laden Sie in VS Code unter _Extensions_ die _Python_ Extension von Microsoft herunter, indem Sie `⇧` + `⌘` + `X` oder `STRG` + `⇧` + `X` drücken.
 
-Beschreibung des Codes
-----------------------
+* **Installation der Python-Bibliotheken und mehr:**
+    * **Virtuelle Umgebung erstellen:**
+      ```shell
+      python3 -m venv AI
+      ```
+      Hier ist "AI" der Name der virtuellen Umgebung.
 
-*   Importieren der Bibliotheken. Mit ultralytics wird YOLOv8 geladen und/oder importiert. Mit cv2 wird das Bild geladen und mit numpy wird das Bild in ein Array umgewandelt.
-    
-    `from ultralytics import YOLO import cv2 import numpy as np`  
-                    
-*   Laden des Models und des Bildes.
-    
-    `# Lade YOLO model model = YOLO('yolov8x.pt')  img = "test.jpg" img = cv2.imread(img)`
-                    
-*   Erkennen des Menschens auf dem Bild.
-    
-    `for r in results:     # Iteriere durch alle erkannten Bounding Boxes in r.boxes     for box, c in zip(r.boxes.xyxy, r.boxes.cls):         class_name = model.names[int(c)]         if class_name == "person":             x1, y1, x2, y2 = map(int, box)             # Zeichne jede Bounding Box auf das Bild             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 4)`
-                    
-    
-    Erläuterung des Loops
-    
-    *   `for r in results` -- Für jedes Bild, welches verarbeitet wird, wird ein neues Objekt `r` erstellt.
-    *   `for box, c in zip(r.boxes.xyxy, r.boxes.cls):` -- Für jede Bounding Box in `r.boxes.xyxy` wird ein neues Objekt `box` erstellt. Für jede Klasse in `r.boxes.cls` wird ein neues Objekt `c` erstellt.
-    *   `class_name = model.names[int(c)]` -- Die Klasse wird in einen String umgewandelt.
-    *   `if class_name == "person":` -- Wenn die Klasse `person` ist, dann wird der Code ausgeführt.
-    *   `x1, y1, x2, y2 = map(int, box)` -- Die Koordinaten der Bounding Box werden in Integer umgewandelt.
-    *   `cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 4)` -- Die Bounding Box wird auf das Bild gezeichnet.
-*   Zeige das Bild an.
-    
-    `# Zeige das Bild an cv2.imshow('YOLOv8n Detection', img) cv2.waitKey(0) cv2.destroyAllWindows()`
+    * **Aktiviere die virtuelle Umgebung:**
+        * **Windows:** 
+         ```shell 
+         AI\Scripts\activate
+         ```
+
+        * **MacOS / Linux:** 
+         ```shell
+         source AI/bin/activate
+         ```
+
+
+    * **Bibliotheken installieren:**
+      ```shell
+      pip install -r requirements.txt
+      ```
+
+    * **Virtuelle Umgebung auswählen:**
+      Klicken Sie auf die [Python-Version (z.B. 3.11.5)] → Klicken Sie auf [Python [Version (z.B. 3.11.5)] (64-bit) ('AI': venv)].
+
+## Beschreibung des Codes
+
+* **Importieren der Bibliotheken:**
+    ```python
+    from ultralytics import YOLO
+    import cv2
+    import numpy as np
+    ```
+
+* **Laden des Modells und des Bildes:**
+    ```python
+    # Lade das YOLO-Modell
+    model = YOLO('yolov8x.pt')
+
+    # Lade das Bild
+    img = "test.jpg"
+    img = cv2.imread(img)
+    ```
+
+* **Erkennung der Menschen auf dem Bild:**
+    ```python
+    for r in results:
+        for box, c in zip(r.boxes.xyxy, r.boxes.cls):
+            class_name = model.names[int(c)]
+            if class_name == "person":
+                x1, y1, x2, y2 = map(int, box)
+                cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 4)
+    ```
+
+    **Erklärung des Loops:**
+    * `for r in results`: Für jedes verarbeitete Bild wird ein neues Objekt `r` erstellt.
+    * `for box, c in zip(r.boxes.xyxy, r.boxes.cls)`: Für jede Bounding Box in `r.boxes.xyxy` wird ein neues Objekt `box` erstellt. Für jede Klasse in `r.boxes.cls` wird ein neues Objekt `c` erstellt.
+    * `class_name = model.names[int(c)]`: Die Klasse wird in einen String umgewandelt.
+    * `if class_name == "person":`: Wenn die Klasse "person" ist, wird der Code ausgeführt.
+    * `x1, y1, x2, y2 = map(int, box)`: Die Koordinaten der Bounding Box werden in Integer umgewandelt.
+    * `cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 4)`: Die Bounding Box wird auf das Bild gezeichnet.
+
+* **Zeige das Bild an:**
+    ```python
+    # Zeige das Bild an
+    cv2.imshow('YOLOv8 Detection', img)
+    cv2.waitKey(0)
+    cv2.destroyAllWindows()
+    ```
