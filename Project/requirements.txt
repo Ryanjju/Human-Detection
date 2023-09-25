@@ -1,0 +1,10 @@
+# Ryan Junge - 2023
+# 25/09/2023
+
+# Erforderliche Python-Pakete:
+numpy
+opencv-python
+ultralytics
+
+# Aktualisiere pip, um sicherzustellen, dass die Pakete korrekt installiert werden.
+pip
