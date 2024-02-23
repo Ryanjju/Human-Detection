@@ -22,6 +22,6 @@ for r in results:
             cv2.rectangle(img, (x1, y1), (x2, y2), (0, 0, 255), 4)
 
 # Show the image with bounding boxes for "person" class
-cv2.imshow('YOLOv8n Detection', img)
+cv2.imshow('YOLOv8x Detection', img)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
